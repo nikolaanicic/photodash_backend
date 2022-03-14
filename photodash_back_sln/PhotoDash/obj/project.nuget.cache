@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "EH6arVXRJJtqdK3UxdYmCm5m6+grlIo29ep+/OVMMlDjPefwAH42UbBZGltN9wRBn2I6d0eYfovq5dOCPVYb8Q==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\nikola.anicic\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\nikola.anicic\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\nikola.anicic\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\nikola.anicic\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\nikola.anicic\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\nikola.anicic\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
