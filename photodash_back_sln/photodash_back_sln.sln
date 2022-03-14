@@ -3,7 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.32228.343
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoDash", "PhotoDash\PhotoDash.csproj", "{5FC2AC44-9959-4F6A-8892-2B38DCCF457D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PhotoDash", "PhotoDash\PhotoDash.csproj", "{5FC2AC44-9959-4F6A-8892-2B38DCCF457D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{D5462FD1-2EF9-4128-91AA-359E60C02E03}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Repository", "Repository\Repository.csproj", "{3DA12603-2E1E-4DC7-B2A0-FE8D16F11F28}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Logger", "Logger\Logger.csproj", "{70F9DF90-3A97-4774-80C1-AB1AE1870767}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Contracts", "Contracts\Contracts.csproj", "{6CABC21B-F276-4E9A-BF55-70E9FEFD6099}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Services", "Services\Services.csproj", "{505122A3-6CDB-4B6E-B38D-0EDA0DA32129}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +25,26 @@ Global
 		{5FC2AC44-9959-4F6A-8892-2B38DCCF457D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5FC2AC44-9959-4F6A-8892-2B38DCCF457D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5FC2AC44-9959-4F6A-8892-2B38DCCF457D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D5462FD1-2EF9-4128-91AA-359E60C02E03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D5462FD1-2EF9-4128-91AA-359E60C02E03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D5462FD1-2EF9-4128-91AA-359E60C02E03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D5462FD1-2EF9-4128-91AA-359E60C02E03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DA12603-2E1E-4DC7-B2A0-FE8D16F11F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DA12603-2E1E-4DC7-B2A0-FE8D16F11F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DA12603-2E1E-4DC7-B2A0-FE8D16F11F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DA12603-2E1E-4DC7-B2A0-FE8D16F11F28}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70F9DF90-3A97-4774-80C1-AB1AE1870767}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70F9DF90-3A97-4774-80C1-AB1AE1870767}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70F9DF90-3A97-4774-80C1-AB1AE1870767}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70F9DF90-3A97-4774-80C1-AB1AE1870767}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CABC21B-F276-4E9A-BF55-70E9FEFD6099}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CABC21B-F276-4E9A-BF55-70E9FEFD6099}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CABC21B-F276-4E9A-BF55-70E9FEFD6099}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CABC21B-F276-4E9A-BF55-70E9FEFD6099}.Release|Any CPU.Build.0 = Release|Any CPU
+		{505122A3-6CDB-4B6E-B38D-0EDA0DA32129}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{505122A3-6CDB-4B6E-B38D-0EDA0DA32129}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{505122A3-6CDB-4B6E-B38D-0EDA0DA32129}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{505122A3-6CDB-4B6E-B38D-0EDA0DA32129}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

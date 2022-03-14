@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using PhotoDash.Extensions;
 
 namespace PhotoDash
 {
@@ -26,6 +27,21 @@ namespace PhotoDash
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.ConfigureLoggerService();
+            services.ConfigureCorsPolicy();
+            services.ConfigureIISIntegration();
+
+            services.ConfigureIdentity();
+            services.ConfigureJWT(Configuration);
+            services.ConfigureAuthenticationManager();
+            services.ConfigureAutoMapper();
+
+            services.ConfigureSqlContext(Configuration);
+            services.ConfigureRepoManager();
+            services.ConfigurePostService();
+            services.ConfigureImagesService();
+
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -43,7 +59,14 @@ namespace PhotoDash
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "PhotoDash v1"));
             }
+            else
+            {
+                app.UseHsts();
 
+            }
+
+
+            app.ConfigureGlobalErrorHandler();
             app.UseHttpsRedirection();
 
             app.UseRouting();
