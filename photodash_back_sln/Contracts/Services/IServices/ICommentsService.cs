@@ -12,8 +12,8 @@ namespace Contracts.Services.IServices
     public interface ICommentsService
     {
 
-        Task<CommentForReplyDto> CreateComment(string username, Guid postId, CommentForCreationDto commentForCreation);
-        Task<bool> DeleteComment(Guid postId,Guid commentId, ClaimsPrincipal currentPrincpal);
+        Task<CommentForReplyDto> CreateComment(CommentForCreationDto commentForCreation);
+        Task<IdentityError> DeleteComment(CommentForDeletionDto commentForDeletion,ClaimsPrincipal currentPrincpal);
         Task<IEnumerable<CommentForReplyDto>> GetCommentsForPost(Guid postId);
 
     }

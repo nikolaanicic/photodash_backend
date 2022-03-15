@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -34,19 +35,19 @@ namespace Services.ServiceImplementations
 
 
 
-        public async Task<CommentForReplyDto> CreateComment(string username, Guid postId, CommentForCreationDto commentForCreation)
+        public async Task<CommentForReplyDto> CreateComment(CommentForCreationDto commentForCreation)
         {
-            var user = await _userManager.FindByNameAsync(username);
+            var user = await _userManager.FindByNameAsync(commentForCreation.UserName);
 
-            var post = await _repository.Posts.GetPostById(postId, false);
+            var post = await _repository.Posts.GetPostById(commentForCreation.OwnerPostId, false);
             if(post == null)
             {
-                _logger.LogError($"Post doesn't exist ID:{postId}");
+                _logger.LogError($"Post doesn't exist ID:{commentForCreation.OwnerPostId}");
                 return null;
             }
 
             var commentEntity = _mapper.Map<Comment>(commentForCreation);
-            _repository.Comments.CreateComment(new Guid(user.Id), postId, commentEntity);
+            _repository.Comments.CreateComment(new Guid(user.Id), commentForCreation.OwnerPostId, commentEntity);
             await _repository.SaveAsync();
             
             var mappedComment = _mapper.Map<CommentForReplyDto>(commentEntity);
@@ -55,40 +56,42 @@ namespace Services.ServiceImplementations
         
         }
 
-        public async Task<bool> DeleteComment(Guid postId,Guid commentId, ClaimsPrincipal currentPrincpal)
+        public async Task<IdentityError> DeleteComment(CommentForDeletionDto commentForDeletion, ClaimsPrincipal currentPrincpal)
         {
             var user = await _userManager.FindByNameAsync(currentPrincpal.Identity.Name);
 
-            var post = await _repository.Posts.GetPostById(postId,false);
+            var post = await _repository.Posts.GetPostById(commentForDeletion.PostId,false);
 
             if(post == null)
             {
-                _logger.LogError($"Post doesn't exist.ID:{postId}");
-                return false;
+                _logger.LogError($"Post doesn't exist.ID:{commentForDeletion.PostId}");
+                return new IdentityError { Code = HttpStatusCode.NotFound.ToString() };
             }
 
 
 
-            var comment = await _repository.Comments.GetComment(postId, commentId, false);
+            var comment = await _repository.Comments.GetComment(commentForDeletion.PostId, commentForDeletion.commentId, false);
 
             if(comment == null)
             {
-                _logger.LogError($"Comment doesn't exist.Id:{commentId}");
-                return false;
+                _logger.LogError($"Comment doesn't exist.Id:{commentForDeletion.commentId}");
+                return new IdentityError { Code = HttpStatusCode.NotFound.ToString() };
+
             }
 
             var commentOwner = await _userManager.FindByIdAsync(comment.OwnerPostId.ToString());
 
             if(!currentPrincpal.IsInRole(RolesHolder.Admin) && !commentOwner.UserName.Equals(currentPrincpal.Identity.Name))
             {
-                return false;
+                return new IdentityError { Code = HttpStatusCode.NotFound.ToString() };
+
             }
 
 
-                _repository.Comments.RemoveComment(comment);
+            _repository.Comments.RemoveComment(comment);
             await _repository.SaveAsync();
 
-            return true;
+            return null;
 
 
         }

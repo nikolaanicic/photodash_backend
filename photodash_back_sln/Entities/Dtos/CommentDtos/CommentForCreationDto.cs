@@ -9,6 +9,6 @@ namespace Entities.Dtos.CommentDtos
 
         public Guid OwnerPostId { get; set; }
 
-        public Guid OwnerUserId { get; set; }
+        public string UserName { get; set; }
     }
 }
