@@ -15,8 +15,5 @@ namespace Entities.Dtos.PostDtos
         [Required(ErrorMessage = "Timestamp is required")]
         public DateTime Posted { get; set; }
 
-        [Required(ErrorMessage = "Post's owner is required")]
-        public Guid OwnerId { get; set; }
-
     }
 }

@@ -1,9 +1,8 @@
 ﻿
 namespace Entities.Dtos.UserDtos
 {
-    public class UserForReplyDto
+    public class UserForDeletionDto
     {
-        public string AccountDescription { get; set; }
         public string UserName { get; set; }
     }
 }

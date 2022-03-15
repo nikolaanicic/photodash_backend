@@ -5,11 +5,13 @@ using Contracts.Services.IServices;
 using Contracts.Services.ImagesService;
 using Entities.Dtos.PostDtos;
 using Entities.Models;
-using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
+using System.Security.Claims;
+using Entities.Roles;
+using System.Net;
 
 namespace Services.ServiceImplementations
 {
@@ -22,7 +24,7 @@ namespace Services.ServiceImplementations
         private IImageService _imagesService;
         private UserManager<User> _userManager;
 
-        public PostsService(IRepositoryManager repo,ILoggerManager logger,IMapper mapper,IImageService imagesService,UserManager<User> userManager)
+        public PostsService(IRepositoryManager repo, ILoggerManager logger, IMapper mapper, IImageService imagesService, UserManager<User> userManager)
         {
             _repository = repo;
             _logger = logger;
@@ -32,78 +34,104 @@ namespace Services.ServiceImplementations
 
         }
 
-        public async Task<IActionResult> CreatePost(PostForCreationDto newPost, Guid ownerId)
+        public async Task<bool> CreatePost(PostForCreationDto newPost, string username)
         {
+
             var imagePath = await _imagesService.SaveImage(newPost.Image);
             var postEntity = _mapper.Map<Post>(newPost);
             postEntity.ImagePath = imagePath;
-            _repository.Posts.CreatePost(ownerId, postEntity);
 
-            return new NoContentResult();
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
+                return false;
+
+            _repository.Posts.CreatePost(new Guid(user.Id), postEntity);
+            await _repository.SaveAsync();
+
+            return true;
         }
 
-        public async Task<IActionResult> GetPost(Guid userId, Guid postId)
+        public async Task<PostForReplyDto> GetPost(string username,Guid id)
         {
-            var postEntity = await _repository.Posts.GetPost(userId, postId, false);
-            if (postEntity == null)
+            var user = await _userManager.FindByNameAsync(username);
+
+            if (user == null)
             {
-                LogPostNotExists(userId,postId);
-                return new NotFoundResult();
+
+                _logger.LogError($"USER NOT FOUND USERNAME:{username}");
+                return null;
             }
 
-            var postToReturn = _mapper.Map<PostForReplyDto>(postEntity);
 
-            return new OkObjectResult(postToReturn);
+            var postEntity = await _repository.Posts.GetPost(new Guid(user.Id), id, false);
+            if (postEntity == null)
+            {
+                _logger.LogError($"Post doesn't exist. Username:{username} Post ID:{id}");
+                return null;
+            }
+
+            return _mapper.Map<PostForReplyDto>(postEntity);
         }
 
-        public async Task<IActionResult> GetPostsForUser(Guid userId)
+        public async Task<IEnumerable<PostForReplyDto>> GetPostsForUser(string username)
         {
 
             //deo za proveru postojanja korisnika izvuci u filtere. kako primeniti filtere unutar servisa?
-            var user = await _userManager.FindByIdAsync(userId.ToString());
-            
-            /*
+            var user = await _userManager.FindByNameAsync(username);
+
             if (user == null)
             {
-                _logger.LogError($"USER NOT FOUND ID:{userId}");
-                return new NotFoundObjectResult(new { userId = userId });
+                _logger.LogError($"USER NOT FOUND USERNAME:{username}");
+                return null;
             }
-            */
 
-            var posts = await _repository.Posts.GetAllPosts(userId, false);
-            var mappedPosts = _mapper.Map<IEnumerable<PostForReplyDto>>(posts);
-            return new OkObjectResult(mappedPosts);
-        
-        
+            var posts = await _repository.Posts.GetAllPosts(new Guid(user.Id), false);
+            return _mapper.Map<IEnumerable<PostForReplyDto>>(posts);
         }
 
-        public async Task<IActionResult> RemovePost(Guid ownerId, Guid postId)
+        public async Task<bool> LikePost(Guid postId)
         {
+            var post = await _repository.Posts.GetPostById(postId, true);
 
-            var user = await _userManager.FindByIdAsync(ownerId.ToString());
+            if (post == null)
+                return false;
+
+            post.LikeCount += 1;
+            await _repository.SaveAsync();
+            return true;
+        }
+
+
+        public async Task<IdentityError> RemovePost(string username, Guid id, ClaimsPrincipal currentPrincipal)
+        {
+            if (!currentPrincipal.IsInRole(RolesHolder.Admin) || !username.Equals(currentPrincipal.Identity.Name))
+            {
+                return  new IdentityError { Code = HttpStatusCode.Unauthorized.ToString(), Description = HttpStatusCode.Unauthorized.ToString()} ;
+            }
+
+            var user = await _userManager.FindByNameAsync(username);
 
             if (user == null)
             {
-                LogPostNotExists(ownerId, postId);
-                return new NotFoundResult();
+                _logger.LogError($"User doesn't exist. Username:{username}");
+                return  new IdentityError { Code = HttpStatusCode.NotFound.ToString(), Description = HttpStatusCode.NotFound.ToString() } ;
             }
 
-            var post = await _repository.Posts.GetPost(ownerId, postId, false);
+            var post = await _repository.Posts.GetPost(new Guid(user.Id), id, false);
 
             if (post == null)
             {
-                LogPostNotExists(ownerId,postId);
-                return new NotFoundResult();
+                _logger.LogError($"Post doesn't exist. Username:{username} Post ID:{id}");
+                return new IdentityError { Code = HttpStatusCode.NotFound.ToString(), Description = HttpStatusCode.NotFound.ToString() };
+
             }
 
             _repository.Posts.DeletePost(post);
-            return new NoContentResult();
+            await _repository.SaveAsync();
+            return null;
         }
 
-        private void LogPostNotExists(Guid ownerId,Guid postId)
-        {
-            var message = $"POST DOESN'T EXIST!USER:{ownerId} POST:{postId}";
-            _logger.LogError(message);
-        }
+
     }
 }

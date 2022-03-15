@@ -45,7 +45,7 @@ namespace Services.ServiceImplementations
 
         private string MakeFullPath()
         {
-            return Path.Combine(GetBasePath(), GetRandPathPart());
+            return Path.Combine(GetBasePath(), GetRandPathPart()) + ".jpg";
         }
     }
 }

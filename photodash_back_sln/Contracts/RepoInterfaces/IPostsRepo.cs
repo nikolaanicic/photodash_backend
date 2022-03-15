@@ -14,6 +14,7 @@ namespace Contracts.RepoInterfaces
         Task<Post> GetPost(Guid userID, Guid postId, bool trackChanges);
         void CreatePost(Guid userID,Post post);
         void DeletePost(Post post);
+        Task<Post> GetPostById(Guid id,bool trackChanges);
 
     }
 }

@@ -4,14 +4,16 @@ using Entities.RepoContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace PhotoDash.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    partial class RepositoryContextModelSnapshot : ModelSnapshot
+    [Migration("20220315080749_DefaultUser")]
+    partial class DefaultUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -94,7 +96,7 @@ namespace PhotoDash.Migrations
                             ImagePath = "Putanja",
                             LikeCount = 1,
                             OwnerId = new Guid("378ae164-ffee-46f9-9322-f87f9119f94c"),
-                            Posted = new DateTime(2022, 3, 15, 3, 43, 21, 907, DateTimeKind.Local).AddTicks(1292)
+                            Posted = new DateTime(2022, 3, 15, 1, 7, 48, 883, DateTimeKind.Local).AddTicks(3494)
                         });
                 });
 
@@ -172,23 +174,6 @@ namespace PhotoDash.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "4E7E18D2-0208-4F4D-86DC-E86492A69806",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "76c62ec0-8561-49a3-8f0d-5d1814dd192d",
-                            EmailConfirmed = false,
-                            FirstName = "Ime",
-                            LastName = "Prezime",
-                            LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEO/AC9uFe8RJIe0Y6qC+xpJXwsYW1eIhORugDDM8gsWzwpSynaUVzeNXHbET/GGeIA==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "796095c0-5f08-47f3-9d5e-67c9bac27c6f",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -216,22 +201,6 @@ namespace PhotoDash.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "d55ed442-b814-46c9-8df5-037508c8ff32",
-                            ConcurrencyStamp = "2f00d55c-2b12-49c8-8ab8-cf1ab29eb68e",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "a23d637f-a4fa-4941-a25a-0f198a912837",
-                            ConcurrencyStamp = "03fabf02-02f9-40c1-9329-285bdaf4f2f2",
-                            Name = "User",
-                            NormalizedName = "USER"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -22,6 +22,7 @@ using PhotoDash.Authentication;
 using Contracts.Services.IServices;
 using Services.ServiceImplementations;
 using Contracts.Services.ImagesService;
+using PhotoDash.ActionFilters;
 
 namespace PhotoDash.Extensions
 {
@@ -63,7 +64,7 @@ namespace PhotoDash.Extensions
 
             builder = new IdentityBuilder(builder.UserType, services);
 
-            builder.AddEntityFrameworkStores<RepositoryContext>()
+            builder.AddRoles<IdentityRole>().AddEntityFrameworkStores<RepositoryContext>()
                 .AddDefaultTokenProviders();
         }
 
@@ -102,5 +103,12 @@ namespace PhotoDash.Extensions
 
         public static void ConfigureImagesService(this IServiceCollection services) =>
             services.AddScoped<IImageService, ImageService>();
+
+        public static void ConfigureValidationFilter(this IServiceCollection services) =>
+            services.AddScoped<ValidateModelAttribute>();
+
+        public static object ConfigureUserService(this IServiceCollection services) =>
+            services.AddScoped<IUserService, UserService>();
+
     }
 }

@@ -28,5 +28,8 @@ namespace Repository.ModelRepos
         public async Task<Post> GetPost(Guid userID, Guid postId, bool trackChanges) =>
             await FindByCondition(x => x.OwnerId.Equals(userID) && x.Id.Equals(postId), trackChanges)
             .SingleOrDefaultAsync();
+
+        public async Task<Post> GetPostById(Guid id, bool trackChanges) =>
+            await FindByCondition(x => x.Id.Equals(id), trackChanges).SingleOrDefaultAsync();
     }
 }

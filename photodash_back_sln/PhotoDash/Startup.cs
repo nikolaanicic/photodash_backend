@@ -30,17 +30,22 @@ namespace PhotoDash
             services.ConfigureLoggerService();
             services.ConfigureCorsPolicy();
             services.ConfigureIISIntegration();
+            services.Configure<ApiBehaviorOptions>(opts =>
+            {
+                opts.SuppressModelStateInvalidFilter = true;
+            });
 
+            services.ConfigureSqlContext(Configuration);
             services.ConfigureIdentity();
             services.ConfigureJWT(Configuration);
             services.ConfigureAuthenticationManager();
             services.ConfigureAutoMapper();
 
-            services.ConfigureSqlContext(Configuration);
             services.ConfigureRepoManager();
             services.ConfigurePostService();
+            services.ConfigureUserService();
             services.ConfigureImagesService();
-
+            services.ConfigureValidationFilter();
 
 
             services.AddControllers();
@@ -68,7 +73,7 @@ namespace PhotoDash
 
             app.ConfigureGlobalErrorHandler();
             app.UseHttpsRedirection();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();
