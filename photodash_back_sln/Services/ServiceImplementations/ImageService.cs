@@ -11,12 +11,12 @@ namespace Services.ServiceImplementations
         public async Task<string> SaveImage(string base64Image)
         {
             var imagePath = MakeFullPath();
-            Save(base64Image, imagePath);
+            await Save(base64Image, imagePath);
             return imagePath;
         }
 
 
-        private void Save(string image,string path)
+        private async Task Save(string image,string path)
         {
             var imgBytes = Convert.FromBase64String(image);
 
@@ -24,7 +24,7 @@ namespace Services.ServiceImplementations
             {
                 using(FileStream fStream = new FileStream(path,FileMode.Create))
                 {
-                    imgStream.CopyTo(fStream);
+                    await imgStream.CopyToAsync(fStream);
                 }
             }
         }
