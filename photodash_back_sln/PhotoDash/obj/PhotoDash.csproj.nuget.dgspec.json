@@ -1,20 +1,24 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj": {}
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj",
+        "projectUniqueName": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj",
         "projectName": "Contracts",
-        "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj",
-        "packagesPath": "C:\\Users\\nikola.anicic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\obj\\",
+        "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj",
+        "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
+        "outputPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nikola.anicic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nikola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -28,8 +32,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj"
               }
             }
           }
@@ -68,21 +72,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj",
+        "projectUniqueName": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj",
         "projectName": "Entities",
-        "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj",
-        "packagesPath": "C:\\Users\\nikola.anicic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\obj\\",
+        "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj",
+        "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
+        "outputPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nikola.anicic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nikola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -132,21 +140,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Logger\\Logger.csproj": {
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Logger\\Logger.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Logger\\Logger.csproj",
+        "projectUniqueName": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Logger\\Logger.csproj",
         "projectName": "Logger",
-        "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Logger\\Logger.csproj",
-        "packagesPath": "C:\\Users\\nikola.anicic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Logger\\obj\\",
+        "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Logger\\Logger.csproj",
+        "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
+        "outputPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Logger\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nikola.anicic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nikola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -160,8 +172,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -196,21 +208,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj": {
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj",
+        "projectUniqueName": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj",
         "projectName": "PhotoDash",
-        "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj",
-        "packagesPath": "C:\\Users\\nikola.anicic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\PhotoDash\\obj\\",
+        "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\PhotoDash\\PhotoDash.csproj",
+        "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
+        "outputPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\PhotoDash\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nikola.anicic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nikola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -224,20 +240,20 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
               },
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj"
               },
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Logger\\Logger.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Logger\\Logger.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Logger\\Logger.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Logger\\Logger.csproj"
               },
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Repository\\Repository.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Repository\\Repository.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Repository\\Repository.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Repository\\Repository.csproj"
               },
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Services\\Services.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Services\\Services.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Services\\Services.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Services\\Services.csproj"
               }
             }
           }
@@ -289,6 +305,12 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.NETCore.App.Host.win-x64",
+              "version": "[5.0.12, 5.0.12]"
+            }
+          ],
           "frameworkReferences": {
             "Microsoft.AspNetCore.App": {
               "privateAssets": "none"
@@ -297,21 +319,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Repository\\Repository.csproj": {
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Repository\\Repository.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Repository\\Repository.csproj",
+        "projectUniqueName": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Repository\\Repository.csproj",
         "projectName": "Repository",
-        "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Repository\\Repository.csproj",
-        "packagesPath": "C:\\Users\\nikola.anicic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Repository\\obj\\",
+        "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Repository\\Repository.csproj",
+        "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
+        "outputPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Repository\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nikola.anicic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nikola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -325,11 +351,11 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
               },
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Entities\\Entities.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Entities\\Entities.csproj"
               }
             }
           }
@@ -358,21 +384,25 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Services\\Services.csproj": {
+    "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Services\\Services.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Services\\Services.csproj",
+        "projectUniqueName": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Services\\Services.csproj",
         "projectName": "Services",
-        "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Services\\Services.csproj",
-        "packagesPath": "C:\\Users\\nikola.anicic\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Services\\obj\\",
+        "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Services\\Services.csproj",
+        "packagesPath": "C:\\Users\\Nikola\\.nuget\\packages\\",
+        "outputPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Services\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\nikola.anicic\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\Nikola\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -386,8 +416,8 @@
           "net5.0": {
             "targetAlias": "net5.0",
             "projectReferences": {
-              "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
-                "projectPath": "C:\\Users\\nikola.anicic\\Desktop\\photodash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
+              "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj": {
+                "projectPath": "E:\\GLUPOSTI\\PhotoDash\\backend\\photodash_back_sln\\Contracts\\Contracts.csproj"
               }
             }
           }
@@ -426,7 +456,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.406\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.100\\RuntimeIdentifierGraph.json"
         }
       }
     }

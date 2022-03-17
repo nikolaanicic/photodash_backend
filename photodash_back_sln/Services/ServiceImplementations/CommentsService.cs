@@ -4,6 +4,7 @@ using Contracts.RepoManager;
 using Contracts.Services.IServices;
 using Entities.Dtos.CommentDtos;
 using Entities.Models;
+using Entities.RequestFeatures;
 using Entities.Roles;
 using Microsoft.AspNetCore.Identity;
 using System;
@@ -96,19 +97,37 @@ namespace Services.ServiceImplementations
 
         }
 
-        public async Task<IEnumerable<CommentForReplyDto>> GetCommentsForPost(Guid postId)
+        public async Task<PagedList<CommentForReplyDto>> GetCommentsForPostAsync(Guid postId, CommentsRequestParameters commentsRequestParameters)
         {
-            var post = await _repository.Posts.GetPostById(postId,false);
-        
-            if(post == null)
+
+            var post = await _repository.Posts.GetPostById(postId, false);
+
+            if (post == null)
             {
-                _logger.LogError($"Post doesn't exist.Id:{postId}");
+                _logger.LogError($"Post doesn't exist.ID:{postId}");
                 return null;
             }
 
-            var comments = await _repository.Comments.GetAllPostComments(postId, false);
-            return _mapper.Map<IEnumerable<CommentForReplyDto>>(comments);
-        
+            var comments = await _repository.Comments.GetCommentsAsync(postId, commentsRequestParameters, false);
+
+            return _mapper.Map<PagedList<CommentForReplyDto>>(comments);
+        }
+
+        public async Task<IdentityError> LikeComment(Guid commentId)
+        {
+
+            var comment = await _repository.Comments.GetCommentByIdAsync(commentId,true);
+
+            if(comment == null)
+            {
+                _logger.LogError($"Comment doesn't exist:{commentId}");
+                return new IdentityError { Code = HttpStatusCode.NotFound.ToString() };
+            }
+
+            comment.LikeCount += 1;
+            await _repository.SaveAsync();
+
+            return null;
         }
     }
 }

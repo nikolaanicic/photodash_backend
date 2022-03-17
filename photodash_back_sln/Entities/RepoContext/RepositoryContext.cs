@@ -17,6 +17,8 @@ namespace Entities.RepoContext
             builder.ApplyConfiguration(new PostsConfiguration());
             builder.ApplyConfiguration(new RolesConfiguration());
             builder.ApplyConfiguration(new UserConfiguration());
+            builder.ApplyConfiguration(new UserRoleConfiguration());
+
 
             base.OnModelCreating(builder);
         }

@@ -1,5 +1,6 @@
 ﻿using Contracts.RepositoryBase;
 using Entities.RepoContext;
+using Entities.RequestFeatures;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Linq;
@@ -37,6 +38,14 @@ namespace Repository
         public IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges)
         {
             return trackChanges ? RepositoryContext.Set<T>().Where<T>(expression) : RepositoryContext.Set<T>().Where(expression).AsNoTracking();
+        }
+
+        public IQueryable<T> FindByConditionPaged(Expression<Func<T, bool>> expression, RequestParameters requestParams,bool trackChanges)
+        {
+            return trackChanges ? RepositoryContext.Set<T>().Where<T>(expression).Skip((requestParams.PageNumber - 1) * requestParams.PageSize)
+                .Take(requestParams.PageSize) :
+                RepositoryContext.Set<T>().Where(expression).Skip((requestParams.PageNumber - 1) * requestParams.PageSize)
+                .Take(requestParams.PageSize);
         }
 
         public void Update(T entity)
