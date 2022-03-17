@@ -1,5 +1,6 @@
 ﻿using Entities.Dtos.Token;
 using Entities.Dtos.UserDtos;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity;
 using System.Collections.Generic;
 using System.Security.Claims;
@@ -13,6 +14,9 @@ namespace Contracts.Services.IServices
         Task<TokenReplyDto> AuthenticateUser(UserForAuthenticationDto authUser);
         Task<IEnumerable<IdentityError>> DeleteUser(UserForDeletionDto userForDeletion,ClaimsPrincipal currentPrincipal);
         Task<UserForReplyDto> GetUser(string username);
+        Task<PagedList<UserForReplyDto>> GetFollowersAsync(ClaimsPrincipal currentPrincipal,FollowersRequestParameters requestQuery);
+        Task<IdentityError> Follow(string username, ClaimsPrincipal currentPrincipal);
+        Task<IdentityError> Unfollow(string username, ClaimsPrincipal currentPrincipal);
 
     }
 }

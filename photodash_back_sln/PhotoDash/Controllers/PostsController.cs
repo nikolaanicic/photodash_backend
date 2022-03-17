@@ -2,10 +2,12 @@
 using Contracts.RepoManager;
 using Contracts.Services.IServices;
 using Entities.Dtos.PostDtos;
+using Entities.RequestFeatures;
 using Entities.Roles;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using PhotoDash.ActionFilters;
 using System;
 using System.Collections.Generic;
@@ -31,14 +33,16 @@ namespace PhotoDash.Controllers
 
 
         [HttpGet, Authorize(Roles = RolesHolder.AdminOrUser)]
-        public async Task<IActionResult> GetPostsForUser(string username)
+        public async Task<IActionResult> GetPostsForUser(string username,[FromQuery]PostsRequestParameters postRequestParameters)
         {
-            var posts = await _postsService.GetPostsForUser(username);
+            var posts = await _postsService.GetPostsAsync(username,postRequestParameters);
 
             if (posts == null)
             {
                 return NotFound();
             }
+
+            Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(posts.MetaData));
 
             return Ok(posts);
         }

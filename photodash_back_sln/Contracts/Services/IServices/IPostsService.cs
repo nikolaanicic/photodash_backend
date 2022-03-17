@@ -1,4 +1,5 @@
 ﻿using Entities.Dtos.PostDtos;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -14,7 +15,7 @@ namespace Contracts.Services.IServices
         Task<bool> CreatePost(PostForCreationDto newPost,string username);
         Task<IdentityError> RemovePost(string username,Guid id,ClaimsPrincipal currentPrincipal);
         Task<PostForReplyDto> GetPost(string username,Guid id);
-        Task<IEnumerable<PostForReplyDto>> GetPostsForUser(string username);
+        Task<PagedList<PostForReplyDto>> GetPostsAsync(string username,PostsRequestParameters postReqestParameters);
         Task<bool> LikePost(Guid postId);
     }
 }

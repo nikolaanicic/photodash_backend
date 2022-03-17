@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace Entities.Configuration
 {
-    public static class Configuration
+    public static class Configuration 
     {
         public static void Seed(RepositoryContext context)
         {

@@ -1,10 +1,8 @@
 ﻿using Entities.Dtos.CommentDtos;
+using Entities.RequestFeatures;
 using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Contracts.Services.IServices
@@ -14,7 +12,8 @@ namespace Contracts.Services.IServices
 
         Task<CommentForReplyDto> CreateComment(CommentForCreationDto commentForCreation);
         Task<IdentityError> DeleteComment(CommentForDeletionDto commentForDeletion,ClaimsPrincipal currentPrincpal);
-        Task<IEnumerable<CommentForReplyDto>> GetCommentsForPost(Guid postId);
+        Task<PagedList<CommentForReplyDto>> GetCommentsForPostAsync(Guid postId,CommentsRequestParameters commentsRequestParameters);
+        Task<IdentityError> LikeComment(Guid commentId);
 
     }
 }

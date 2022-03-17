@@ -47,5 +47,17 @@ namespace Services.ServiceImplementations
         {
             return Path.Combine(GetBasePath(), GetRandPathPart()) + ".jpg";
         }
+
+        public async Task<bool> RemoveImage(string path)
+        {
+            bool retval = false;
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+                retval = true;
+            }
+            return retval;
+
+        }
     }
 }

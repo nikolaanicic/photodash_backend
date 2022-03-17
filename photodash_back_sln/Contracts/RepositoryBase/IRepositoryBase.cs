@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Linq.Expressions;
+using Entities.RequestFeatures;
 
 namespace Contracts.RepositoryBase
 {
@@ -8,6 +9,7 @@ namespace Contracts.RepositoryBase
     {
         IQueryable<T> FindAll(bool trackChanges);
         IQueryable<T> FindByCondition(Expression<Func<T, bool>> expression, bool trackChanges);
+        IQueryable<T> FindByConditionPaged(Expression<Func<T, bool>> expression, RequestParameters requestParams, bool trackChanges);
 
         void Create(T entity);
         void Update(T entity);

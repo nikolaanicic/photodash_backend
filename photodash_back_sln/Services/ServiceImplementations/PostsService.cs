@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using Entities.Roles;
 using System.Net;
+using Entities.RequestFeatures;
 
 namespace Services.ServiceImplementations
 {
@@ -74,22 +75,6 @@ namespace Services.ServiceImplementations
             return _mapper.Map<PostForReplyDto>(postEntity);
         }
 
-        public async Task<IEnumerable<PostForReplyDto>> GetPostsForUser(string username)
-        {
-
-            //deo za proveru postojanja korisnika izvuci u filtere. kako primeniti filtere unutar servisa?
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
-            {
-                _logger.LogError($"USER NOT FOUND USERNAME:{username}");
-                return null;
-            }
-
-            var posts = await _repository.Posts.GetAllPosts(new Guid(user.Id), false);
-            return _mapper.Map<IEnumerable<PostForReplyDto>>(posts);
-        }
-
         public async Task<bool> LikePost(Guid postId)
         {
             var post = await _repository.Posts.GetPostById(postId, true);
@@ -102,10 +87,17 @@ namespace Services.ServiceImplementations
             return true;
         }
 
+        public async Task<PagedList<PostForReplyDto>> GetPostsAsync(string username,PostsRequestParameters postRequestParameters)
+        {
+            var user = await _userManager.FindByNameAsync(username);
+            var posts = await _repository.Posts.GetPostsAsync(new Guid(user.Id), postRequestParameters, false);
+
+            return _mapper.Map<PagedList<PostForReplyDto>>(posts);
+        }
 
         public async Task<IdentityError> RemovePost(string username, Guid id, ClaimsPrincipal currentPrincipal)
         {
-            if (!currentPrincipal.IsInRole(RolesHolder.Admin) || !username.Equals(currentPrincipal.Identity.Name))
+            if (!currentPrincipal.IsInRole(RolesHolder.Admin) && !username.Equals(currentPrincipal.Identity.Name))
             {
                 return  new IdentityError { Code = HttpStatusCode.Unauthorized.ToString(), Description = HttpStatusCode.Unauthorized.ToString()} ;
             }
@@ -128,7 +120,9 @@ namespace Services.ServiceImplementations
             }
 
             _repository.Posts.DeletePost(post);
+            await _imagesService.RemoveImage(post.ImagePath);
             await _repository.SaveAsync();
+
             return null;
         }
 
