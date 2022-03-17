@@ -45,6 +45,7 @@ namespace PhotoDash
             services.ConfigurePostService();
             services.ConfigureUserService();
             services.ConfigureImagesService();
+            services.ConfigureCommentService();
             services.ConfigureValidationFilter();
 
 

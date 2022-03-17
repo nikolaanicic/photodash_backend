@@ -28,13 +28,7 @@ namespace PhotoDash.Controllers
         [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> Login([FromBody]UserForAuthenticationDto authUser)
         {
-            var token = await _userService.AuthenticateUser(authUser);
-
-            if(token == null)
-            {
-                return NotFound();
-            }
-            return Ok(token);
+            return Ok(await _userService.AuthenticateUser(authUser));
         }
 
         [HttpPost("register")]

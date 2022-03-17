@@ -100,6 +100,8 @@ namespace PhotoDash.Extensions
 
         public static void ConfigurePostService(this IServiceCollection services) =>
             services.AddScoped<IPostsService, PostsService>();
+        public static void ConfigureCommentService(this IServiceCollection services) =>
+            services.AddScoped<ICommentsService, CommentsService>();
 
         public static void ConfigureImagesService(this IServiceCollection services) =>
             services.AddScoped<IImageService, ImageService>();
