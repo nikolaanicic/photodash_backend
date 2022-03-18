@@ -41,9 +41,11 @@ namespace PhotoDash.Controllers
 
         [HttpPost,Authorize(Roles =RolesHolder.User)]
 
-        public async Task<IActionResult> PostComment([FromBody] CommentForCreationDto commentForCreationDto)
+        public async Task<IActionResult> PostComment(Guid postId,[FromBody] CommentForCreationDto commentForCreationDto)
         {
-            var result = await _commentsService.CreateComment(commentForCreationDto);
+
+            var currentPrincipal = HttpContext.User;
+            var result = await _commentsService.CreateComment(postId,commentForCreationDto,currentPrincipal);
 
             if (result == null)
             {

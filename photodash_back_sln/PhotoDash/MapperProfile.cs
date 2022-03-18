@@ -19,6 +19,7 @@ namespace PhotoDash
             CreateMap<UserForCreationDto, User>();
             CreateMap<CommentForCreationDto, Comment>();
             CreateMap<User, UserForReplyDto>();
+            CreateMap<Comment, CommentForReplyDto>();
         }
     }
 }

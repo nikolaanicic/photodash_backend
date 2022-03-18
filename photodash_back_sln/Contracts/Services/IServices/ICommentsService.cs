@@ -10,7 +10,7 @@ namespace Contracts.Services.IServices
     public interface ICommentsService
     {
 
-        Task<CommentForReplyDto> CreateComment(CommentForCreationDto commentForCreation);
+        Task<CommentForReplyDto> CreateComment(Guid postId,CommentForCreationDto commentForCreation,ClaimsPrincipal currentPrincipal);
         Task<IdentityError> DeleteComment(CommentForDeletionDto commentForDeletion,ClaimsPrincipal currentPrincpal);
         Task<PagedList<CommentForReplyDto>> GetCommentsForPostAsync(Guid postId,CommentsRequestParameters commentsRequestParameters);
         Task<IdentityError> LikeComment(Guid commentId);

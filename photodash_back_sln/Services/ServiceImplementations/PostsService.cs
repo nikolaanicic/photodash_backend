@@ -89,28 +89,22 @@ namespace Services.ServiceImplementations
             return new PagedList<PostForReplyDto>(mapped, posts.MetaData.TotalCount, postRequestParameters.PageNumber, postRequestParameters.PageSize);
         }
 
-        public async Task<IdentityError> RemovePost(string username, Guid id, ClaimsPrincipal currentPrincipal)
+        public async Task<IdentityError> RemovePost(Guid id, ClaimsPrincipal currentPrincipal)
         {
-            if (!currentPrincipal.IsInRole(RolesHolder.Admin) && !username.Equals(currentPrincipal.Identity.Name))
-            {
-                return  new IdentityError { Code = HttpStatusCode.Unauthorized.ToString(), Description = HttpStatusCode.Unauthorized.ToString()} ;
-            }
-
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
-            {
-                _logger.LogError($"User doesn't exist. Username:{username}");
-                return  new IdentityError { Code = HttpStatusCode.NotFound.ToString(), Description = HttpStatusCode.NotFound.ToString() } ;
-            }
-
-            var post = await _repository.Posts.GetPost(user.Id, id, false);
+            var post = await _repository.Posts.GetPostById(id, false);
 
             if (post == null)
             {
-                _logger.LogError($"Post doesn't exist. Username:{username} Post ID:{id}");
+                _logger.LogError($"Post doesn't exist.Post ID:{id}");
                 return new IdentityError { Code = HttpStatusCode.NotFound.ToString(), Description = HttpStatusCode.NotFound.ToString() };
+            }
 
+
+            var user = await _userManager.FindByNameAsync(currentPrincipal.Identity.Name);
+
+            if (!currentPrincipal.IsInRole(RolesHolder.Admin) && !post.OwnerId.Equals(user.Id))
+            {
+                return new IdentityError { Code = HttpStatusCode.Unauthorized.ToString(), Description = HttpStatusCode.Unauthorized.ToString() };
             }
 
             _repository.Posts.DeletePost(post);

@@ -18,5 +18,7 @@ namespace Contracts.Services.IServices
         Task<IdentityError> Follow(string username, ClaimsPrincipal currentPrincipal);
         Task<IdentityError> Unfollow(string username, ClaimsPrincipal currentPrincipal);
 
+        Task<IEnumerable<UserForReplyDto>> SearchByUsernamePart(string usernameParam, ClaimsPrincipal currentPrincipal);
+
     }
 }

@@ -36,19 +36,19 @@ namespace Services.ServiceImplementations
 
 
 
-        public async Task<CommentForReplyDto> CreateComment(CommentForCreationDto commentForCreation)
+        public async Task<CommentForReplyDto> CreateComment(Guid postId,CommentForCreationDto commentForCreation,ClaimsPrincipal currentPrincipal)
         {
-            var user = await _userManager.FindByNameAsync(commentForCreation.UserName);
+            var user = await _userManager.FindByNameAsync(currentPrincipal.Identity.Name);
 
-            var post = await _repository.Posts.GetPostById(commentForCreation.OwnerPostId, false);
+            var post = await _repository.Posts.GetPostById(postId, false);
             if(post == null)
             {
-                _logger.LogError($"Post doesn't exist ID:{commentForCreation.OwnerPostId}");
+                _logger.LogError($"Post doesn't exist ID");
                 return null;
             }
 
             var commentEntity = _mapper.Map<Comment>(commentForCreation);
-            _repository.Comments.CreateComment(user.Id, commentForCreation.OwnerPostId, commentEntity);
+            _repository.Comments.CreateComment(user.Id, postId, commentEntity);
             await _repository.SaveAsync();
             
             var mappedComment = _mapper.Map<CommentForReplyDto>(commentEntity);

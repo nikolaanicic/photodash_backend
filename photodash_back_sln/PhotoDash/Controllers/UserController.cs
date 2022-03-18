@@ -25,6 +25,20 @@ namespace PhotoDash.Controllers
             _userService = userService;
         }
 
+
+
+
+        [HttpGet("search/{usernameParam}"),Authorize(Roles = RolesHolder.AdminOrUser)]
+        public async Task<IActionResult> GetUsers(string usernameParam)
+        {
+            var currentPrincipal = HttpContext.User;
+            var result = await _userService.SearchByUsernamePart(usernameParam, currentPrincipal);
+
+            return Ok(result);
+        }
+
+
+
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody]UserForAuthenticationDto authUser)
         {
@@ -87,7 +101,7 @@ namespace PhotoDash.Controllers
         }
 
 
-        [HttpPut("follow/{username}"),Authorize]
+        [HttpGet("follow/{username}"),Authorize(Roles = RolesHolder.User)]
         public async Task<IActionResult> Follow(string username)
         {
             var currentPrincipal = HttpContext.User;
@@ -100,7 +114,7 @@ namespace PhotoDash.Controllers
             return (result.Code == HttpStatusCode.BadRequest.ToString() ? BadRequest() : NotFound());
         }
 
-        [HttpPut("unfollow/{username}"), Authorize(Roles = RolesHolder.User)]
+        [HttpGet("unfollow/{username}"), Authorize(Roles = RolesHolder.User)]
         public async Task<IActionResult> Unfollow(string username)
         {
             var currentPrincipal = HttpContext.User;

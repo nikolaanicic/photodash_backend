@@ -73,7 +73,7 @@ namespace PhotoDash.Controllers
             return Ok();
         }
 
-        [HttpPatch("like/{id}"), Authorize(Roles = RolesHolder.User)]
+        [HttpGet("like/{id}"), Authorize(Roles = RolesHolder.User)]
         public async Task<IActionResult> LikePost(Guid id)
         {
             var result = await _postsService.LikePost(id);
@@ -100,10 +100,10 @@ namespace PhotoDash.Controllers
         }
 
         [HttpDelete("{id}"), Authorize(Roles = RolesHolder.AdminOrUser)]
-        public async Task<IActionResult> DeletePost(Guid id, string username)
+        public async Task<IActionResult> DeletePost(Guid id)
         {
             var currentPrincipal = HttpContext.User;
-            var result = await _postsService.RemovePost(username, id, currentPrincipal);
+            var result = await _postsService.RemovePost(id, currentPrincipal);
 
             if (result == null)
                 return NoContent();

@@ -1,5 +1,4 @@
-﻿using Entities.Dtos.UserDtos;
-using System;
+﻿using System;
 
 
 namespace Entities.Dtos.PostDtos
@@ -11,6 +10,5 @@ namespace Entities.Dtos.PostDtos
         public DateTime Posted { get; set; }
         public int LikeCount { get; set; }
         public Guid Id { get; set; }
-
     }
 }

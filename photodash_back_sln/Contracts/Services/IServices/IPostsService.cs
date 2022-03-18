@@ -13,7 +13,7 @@ namespace Contracts.Services.IServices
     public interface IPostsService
     {
         Task<bool> CreatePost(PostForCreationDto newPost,string username);
-        Task<IdentityError> RemovePost(string username,Guid id,ClaimsPrincipal currentPrincipal);
+        Task<IdentityError> RemovePost(Guid id,ClaimsPrincipal currentPrincipal);
         Task<PostForReplyDto> GetPostAsync(Guid id);
         Task<PagedList<PostForReplyDto>> GetPostsAsync(string username,PostsRequestParameters postReqestParameters);
         Task<bool> LikePost(Guid postId);

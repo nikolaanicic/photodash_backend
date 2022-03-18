@@ -48,7 +48,6 @@ namespace Services.ServiceImplementations
             {
                 _logger.LogWarn($"Invalid username or password login");
                 return null;
-
             }
 
             var token = await _authManager.CreateToken();
@@ -127,6 +126,10 @@ namespace Services.ServiceImplementations
             var count = currentUser.Followers.Count;
 
             var mappedFollowers = _mapper.Map<IEnumerable<UserForReplyDto>>(followers);
+            foreach(var follower in mappedFollowers)
+            {
+                follower.IsFollowed = true;
+            }
 
             return new PagedList<UserForReplyDto>(mappedFollowers.ToList(), count, requestQuery.PageNumber, requestQuery.PageSize);
         }
@@ -168,6 +171,28 @@ namespace Services.ServiceImplementations
 
             return null;
         }
+
+        public async Task<IEnumerable<UserForReplyDto>> SearchByUsernamePart(string usernameParam, ClaimsPrincipal currentPrincipal)
+        {
+            var followers = (await _userManager.Users.Where(u => u.UserName.Equals(currentPrincipal.Identity.Name)).Include(u=>u.Followers).SingleAsync()).Followers;
+            var admins = (await _userManager.GetUsersInRoleAsync(RolesHolder.Admin));
+
+            var searchUsers = await _userManager.Users.Where(x => x.UserName.Contains(usernameParam) && !admins.Contains(x) && !x.UserName.Equals(currentPrincipal.Identity.Name)).OrderBy(x => x.UserName).ToListAsync();
+
+
+            var mappedUsers = _mapper.Map<IEnumerable<UserForReplyDto>>(searchUsers);
+
+            foreach(var user in mappedUsers)
+            {
+                if(followers.Any(x=>x.UserName.Equals(user.UserName)))
+                {
+                    user.IsFollowed = true;
+                }
+            }
+
+            return mappedUsers;
+        }
+
 
         public async Task<IdentityError> Unfollow(string username, ClaimsPrincipal currentPrincipal)
         {
