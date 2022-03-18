@@ -48,7 +48,7 @@ namespace Services.ServiceImplementations
             }
 
             var commentEntity = _mapper.Map<Comment>(commentForCreation);
-            _repository.Comments.CreateComment(new Guid(user.Id), commentForCreation.OwnerPostId, commentEntity);
+            _repository.Comments.CreateComment(user.Id, commentForCreation.OwnerPostId, commentEntity);
             await _repository.SaveAsync();
             
             var mappedComment = _mapper.Map<CommentForReplyDto>(commentEntity);

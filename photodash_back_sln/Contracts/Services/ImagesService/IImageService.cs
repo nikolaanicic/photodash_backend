@@ -9,7 +9,7 @@ namespace Contracts.Services.ImagesService
 {
     public interface IImageService
     {
-        Task<string> SaveImage(string base64Image);
+        Task<string> SaveImage(IFormFile base64Image);
         Task<bool> RemoveImage(string path);
     }
 }

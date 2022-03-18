@@ -10,10 +10,10 @@ namespace Contracts.RepoInterfaces
 {
     public interface IPostsRepo
     {
-        Task<IEnumerable<Post>> GetAllPosts(Guid userId,bool trackChanges);
-        Task<PagedList<Post>> GetPostsAsync(Guid id, PostsRequestParameters postRequestParameters,bool trackChanges);
-        Task<Post> GetPost(Guid userID, Guid postId, bool trackChanges);
-        void CreatePost(Guid userID,Post post);
+        Task<IEnumerable<Post>> GetAllPosts(string userId,bool trackChanges);
+        Task<PagedList<Post>> GetPostsAsync(string id, PostsRequestParameters postRequestParameters,bool trackChanges);
+        Task<Post> GetPost(string userID, Guid postId, bool trackChanges);
+        void CreatePost(string userID,Post post);
         void DeletePost(Post post);
         Task<Post> GetPostById(Guid id,bool trackChanges);
 

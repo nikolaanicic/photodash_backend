@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 
@@ -8,7 +9,7 @@ namespace Entities.Dtos.PostDtos
     {
 
         [Required(ErrorMessage = "Post's image is required")]
-        public string Image { get; set; }
+        public IFormFile Image { get; set; }
 
         public string Description { get; set; }
 

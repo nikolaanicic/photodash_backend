@@ -10,6 +10,7 @@ namespace Entities.Dtos.PostDtos
         public string Description { get; set; }
         public DateTime Posted { get; set; }
         public int LikeCount { get; set; }
+        public Guid Id { get; set; }
 
     }
 }

@@ -38,10 +38,10 @@ namespace PhotoDash.Migrations
                     b.Property<Guid>("OwnerPostId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<Guid>("OwnerUserId")
-                        .HasColumnType("uniqueidentifier");
+                    b.Property<string>("OwnerUserId")
+                        .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OwnerUserId1")
+                    b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
@@ -50,7 +50,7 @@ namespace PhotoDash.Migrations
 
                     b.HasIndex("OwnerPostId");
 
-                    b.HasIndex("OwnerUserId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Comments");
                 });
@@ -71,18 +71,18 @@ namespace PhotoDash.Migrations
                     b.Property<int>("LikeCount")
                         .HasColumnType("int");
 
-                    b.Property<Guid>("OwnerId")
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<string>("OwnerId1")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<string>("OwnerId")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("Posted")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("UserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("OwnerId1");
+                    b.HasIndex("UserId");
 
                     b.ToTable("Posts");
 
@@ -93,8 +93,8 @@ namespace PhotoDash.Migrations
                             Description = "post",
                             ImagePath = "Putanja",
                             LikeCount = 1,
-                            OwnerId = new Guid("378ae164-ffee-46f9-9322-f87f9119f94c"),
-                            Posted = new DateTime(2022, 3, 16, 22, 17, 25, 479, DateTimeKind.Local).AddTicks(6462)
+                            OwnerId = "378AE164-FFEE-46F9-9322-F87F9119F94C",
+                            Posted = new DateTime(2022, 3, 18, 0, 31, 50, 369, DateTimeKind.Local).AddTicks(1312)
                         });
                 });
 
@@ -178,14 +178,14 @@ namespace PhotoDash.Migrations
                         {
                             Id = "4E7E18D2-0208-4F4D-86DC-E86492A69806",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "202b9f38-71b6-4cb9-87f5-c769f07bf87d",
+                            ConcurrencyStamp = "b3940370-ee0f-4d38-a3d0-4faeebc2bc6f",
                             EmailConfirmed = false,
                             FirstName = "Ime",
                             LastName = "Prezime",
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEPsDJHGrCqhdTTuOD7B2GbjUsUIz5UbOzy6GIaavlr1FT09uDfbapmhFpx3rVCmtcQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEJqjJz+y2Rbq+ZySpcWUnW+AarnmpPUCj9sopkgwXTiPSuU+W/h3RxRyXU/wCBLWxg==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "eb25eb2c-ae4f-4c5a-8220-5a6141430daf",
+                            SecurityStamp = "5fd5c95f-7e5c-45f7-9dc0-0cc988adc70c",
                             TwoFactorEnabled = false,
                             UserName = "admin"
                         });
@@ -221,14 +221,14 @@ namespace PhotoDash.Migrations
                         new
                         {
                             Id = "F6A4887A-D95E-4835-9DB4-6671CB299AD2",
-                            ConcurrencyStamp = "5d1eb587-7ad8-4444-aa70-c55699996cf7",
+                            ConcurrencyStamp = "b9d21038-c97d-4aa2-9b08-514ea2c44583",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "55f60ab1-d60b-46e5-888a-dec052836214",
-                            ConcurrencyStamp = "7f8de71b-2cb5-4f8e-b3e6-2e83ca8ba6a0",
+                            Id = "731c1d15-1fdc-4ca4-bfa5-491c0757e176",
+                            ConcurrencyStamp = "a52e68c4-d6fc-4ca5-9d01-c73f098ccbe6",
                             Name = "User",
                             NormalizedName = "USER"
                         });
@@ -357,22 +357,18 @@ namespace PhotoDash.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Entities.Models.User", "OwnerUser")
+                    b.HasOne("Entities.Models.User", null)
                         .WithMany("Comments")
-                        .HasForeignKey("OwnerUserId1");
+                        .HasForeignKey("UserId");
 
                     b.Navigation("OwnerPost");
-
-                    b.Navigation("OwnerUser");
                 });
 
             modelBuilder.Entity("Entities.Models.Post", b =>
                 {
-                    b.HasOne("Entities.Models.User", "Owner")
+                    b.HasOne("Entities.Models.User", null)
                         .WithMany("Posts")
-                        .HasForeignKey("OwnerId1");
-
-                    b.Navigation("Owner");
+                        .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Entities.Models.User", b =>

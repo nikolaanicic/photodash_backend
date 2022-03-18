@@ -53,7 +53,7 @@ namespace Services.ServiceImplementations
 
             var token = await _authManager.CreateToken();
 
-            return new TokenReplyDto { Token = token,Role = (await _userManager.GetRolesAsync(user)).Single() };
+            return new TokenReplyDto { Token = token,Role = (await _userManager.GetRolesAsync(user)).Single(),Username = user.UserName };
 
         }
 

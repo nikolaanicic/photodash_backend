@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
@@ -19,8 +19,9 @@ namespace Entities.Models
         public Guid OwnerPostId { get; set; }
         public Post OwnerPost { get; set; }
 
-        public Guid OwnerUserId { get; set; }
-        public User OwnerUser { get; set; }
+        [ForeignKey("OwnerUser")]
+
+        public string OwnerUserId { get; set; }
 
     }
 }

@@ -16,7 +16,7 @@ namespace Repository.ModelRepos
         {
         }
 
-        public void CreatePost(Guid userID, Post post)
+        public void CreatePost(string userID, Post post)
         {
             post.OwnerId = userID;
             Create(post);
@@ -24,17 +24,17 @@ namespace Repository.ModelRepos
 
         public void DeletePost(Post post) => Delete(post);
 
-        public async Task<IEnumerable<Post>> GetAllPosts(Guid userId, bool trackChanges) =>
+        public async Task<IEnumerable<Post>> GetAllPosts(string userId, bool trackChanges) =>
             await FindByCondition(x => x.OwnerId.Equals(userId), trackChanges).ToListAsync();
 
-        public async Task<Post> GetPost(Guid userID, Guid postId, bool trackChanges) =>
+        public async Task<Post> GetPost(string userID, Guid postId, bool trackChanges) =>
             await FindByCondition(x => x.OwnerId.Equals(userID) && x.Id.Equals(postId), trackChanges)
             .SingleOrDefaultAsync();
 
         public async Task<Post> GetPostById(Guid id, bool trackChanges) =>
             await FindByCondition(x => x.Id.Equals(id), trackChanges).SingleOrDefaultAsync();
 
-        public async Task<PagedList<Post>> GetPostsAsync(Guid id, PostsRequestParameters postRequestParameters,bool trackChanges)
+        public async Task<PagedList<Post>> GetPostsAsync(string id, PostsRequestParameters postRequestParameters,bool trackChanges)
         {
             var posts = await FindByConditionPaged(x => x.OwnerId.Equals(id), postRequestParameters, trackChanges).ToListAsync();
             var count = await FindByCondition(u => u.OwnerId.Equals(id), trackChanges).CountAsync();

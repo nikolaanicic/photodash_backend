@@ -18,8 +18,10 @@ using System.Threading.Tasks;
 
 namespace PhotoDash.Controllers
 {
-    [Route("api/{username}/posts")]
+    [Route("api/posts")]
     [ApiController]
+    [ServiceFilter(typeof(ValidateModelAttribute))]
+
     public class PostsController : ControllerBase
     {
 
@@ -32,7 +34,7 @@ namespace PhotoDash.Controllers
         }
 
 
-        [HttpGet, Authorize(Roles = RolesHolder.AdminOrUser)]
+        [HttpGet("{username}"), Authorize(Roles = RolesHolder.AdminOrUser)]
         public async Task<IActionResult> GetPostsForUser(string username,[FromQuery]PostsRequestParameters postRequestParameters)
         {
             var posts = await _postsService.GetPostsAsync(username,postRequestParameters);
@@ -44,12 +46,21 @@ namespace PhotoDash.Controllers
 
             Response.Headers.Add("X-Pagination", JsonConvert.SerializeObject(posts.MetaData));
 
-            return Ok(posts);
+            return Ok(new { meta = posts.MetaData, data = posts });
+
         }
 
-        [HttpPost("post"), Authorize(Roles = RolesHolder.User)]
-        [ServiceFilter(typeof(ValidateModelAttribute))]
-        public async Task<IActionResult> CreatePost([FromBody] PostForCreationDto newPost)
+        [HttpGet("newest"),Authorize(Roles = RolesHolder.User)]
+
+        public async Task<IActionResult> GetNewestFollowerPosts([FromQuery]PostsRequestParameters postRequestParameters)
+        {
+            var username = HttpContext.User.Identity.Name;
+            var posts = await _postsService.GetNewestAsync(username, postRequestParameters);
+            return Ok(new {meta=posts.MetaData, data=posts });
+        }
+
+        [HttpPost, Authorize(Roles = RolesHolder.User)]
+        public async Task<IActionResult> CreatePost([FromForm] PostForCreationDto newPost)
         {
             var user = HttpContext.User.Identity.Name;
             bool result = await _postsService.CreatePost(newPost, user);
@@ -73,12 +84,12 @@ namespace PhotoDash.Controllers
             return NoContent();
         }
 
-        [HttpGet("{id}"), Authorize(Roles = RolesHolder.AdminOrUser)]
+        [HttpGet("one/{id}"), Authorize(Roles = RolesHolder.AdminOrUser)]
 
-        public async Task<IActionResult> GetPost(Guid id, string username)
+        public async Task<IActionResult> GetPost(Guid id)
         {
 
-            var post = await _postsService.GetPost(username, id);
+            var post = await _postsService.GetPostAsync(id);
 
             if (post == null)
             {

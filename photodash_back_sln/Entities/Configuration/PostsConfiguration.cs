@@ -20,7 +20,7 @@ namespace Entities.Configuration
                 ImagePath = "Putanja",
                 LikeCount = 1,
                 Description = "post",
-                OwnerId = new Guid("378AE164-FFEE-46F9-9322-F87F9119F94C"),
+                OwnerId = "378AE164-FFEE-46F9-9322-F87F9119F94C",
                 Posted = DateTime.Now,
             }) ;
         }

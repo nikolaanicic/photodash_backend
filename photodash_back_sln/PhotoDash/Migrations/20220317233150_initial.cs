@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace PhotoDash.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -26,6 +26,8 @@ namespace PhotoDash.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     UserId = table.Column<string>(type: "nvarchar(450)", nullable: true),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -165,18 +167,18 @@ namespace PhotoDash.Migrations
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Image = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    ImagePath = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LikeCount = table.Column<int>(type: "int", nullable: false),
                     Posted = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OwnerId1 = table.Column<string>(type: "nvarchar(450)", nullable: true)
+                    OwnerId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Posts", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Posts_AspNetUsers_OwnerId1",
-                        column: x => x.OwnerId1,
+                        name: "FK_Posts_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -190,16 +192,16 @@ namespace PhotoDash.Migrations
                     CommentContent = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LikeCount = table.Column<int>(type: "int", nullable: false),
                     OwnerPostId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OwnerUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    OwnerUserId1 = table.Column<string>(type: "nvarchar(450)", nullable: true),
-                    CommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true)
+                    OwnerUserId = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    CommentId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
+                    UserId = table.Column<string>(type: "nvarchar(450)", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Comments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_Comments_AspNetUsers_OwnerUserId1",
-                        column: x => x.OwnerUserId1,
+                        name: "FK_Comments_AspNetUsers_UserId",
+                        column: x => x.UserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -218,9 +220,28 @@ namespace PhotoDash.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
+                values: new object[,]
+                {
+                    { "F6A4887A-D95E-4835-9DB4-6671CB299AD2", "b9d21038-c97d-4aa2-9b08-514ea2c44583", "Administrator", "ADMINISTRATOR" },
+                    { "731c1d15-1fdc-4ca4-bfa5-491c0757e176", "a52e68c4-d6fc-4ca5-9d01-c73f098ccbe6", "User", "USER" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserId", "UserName" },
+                values: new object[] { "4E7E18D2-0208-4F4D-86DC-E86492A69806", 0, "b3940370-ee0f-4d38-a3d0-4faeebc2bc6f", null, false, "Ime", "Prezime", false, null, null, null, "AQAAAAEAACcQAAAAEJqjJz+y2Rbq+ZySpcWUnW+AarnmpPUCj9sopkgwXTiPSuU+W/h3RxRyXU/wCBLWxg==", null, false, "5fd5c95f-7e5c-45f7-9dc0-0cc988adc70c", false, null, "admin" });
+
+            migrationBuilder.InsertData(
                 table: "Posts",
-                columns: new[] { "Id", "Description", "Image", "LikeCount", "OwnerId", "OwnerId1", "Posted" },
-                values: new object[] { new Guid("a798b7f7-e78c-4f65-808c-84ab531b0ee0"), "post", new byte[] { 0, 0 }, 1, new Guid("378ae164-ffee-46f9-9322-f87f9119f94c"), null, new DateTime(2022, 3, 14, 4, 6, 4, 871, DateTimeKind.Local).AddTicks(6974) });
+                columns: new[] { "Id", "Description", "ImagePath", "LikeCount", "OwnerId", "Posted", "UserId" },
+                values: new object[] { new Guid("a798b7f7-e78c-4f65-808c-84ab531b0ee0"), "post", "Putanja", 1, "378AE164-FFEE-46F9-9322-F87F9119F94C", new DateTime(2022, 3, 18, 0, 31, 50, 369, DateTimeKind.Local).AddTicks(1312), null });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[] { "F6A4887A-D95E-4835-9DB4-6671CB299AD2", "4E7E18D2-0208-4F4D-86DC-E86492A69806" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -277,14 +298,14 @@ namespace PhotoDash.Migrations
                 column: "OwnerPostId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Comments_OwnerUserId1",
+                name: "IX_Comments_UserId",
                 table: "Comments",
-                column: "OwnerUserId1");
+                column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Posts_OwnerId1",
+                name: "IX_Posts_UserId",
                 table: "Posts",
-                column: "OwnerId1");
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

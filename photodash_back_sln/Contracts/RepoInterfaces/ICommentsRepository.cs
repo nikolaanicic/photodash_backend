@@ -13,7 +13,7 @@ namespace Contracts.RepoInterfaces
 
         Task<Comment> GetCommentByIdAsync(Guid commentId,bool trackChanges);
 
-        void CreateComment(Guid userID, Guid postID, Comment comment);
+        void CreateComment(string userID, Guid postID, Comment comment);
         void RemoveComment(Comment comment);
         void UpdateComment(Comment comment);
 

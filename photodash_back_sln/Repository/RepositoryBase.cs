@@ -23,6 +23,7 @@ namespace Repository
         public void Create(T entity)
         {
             RepositoryContext.Set<T>().Add(entity);
+            
         }
 
         public void Delete(T entity)

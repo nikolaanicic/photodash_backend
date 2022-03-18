@@ -15,7 +15,7 @@ namespace Repository.ModelRepos
         {
         }
 
-        public void CreateComment(Guid userID, Guid postID, Comment comment)
+        public void CreateComment(string userID, Guid postID, Comment comment)
         {
             comment.OwnerPostId = postID;
             comment.OwnerUserId = userID;

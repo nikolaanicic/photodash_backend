@@ -14,6 +14,7 @@ namespace PhotoDash.Controllers
 {
     [Route("api/user")]
     [ApiController]
+    [ServiceFilter(typeof(ValidateModelAttribute))]
     public class UserController : ControllerBase
     {
 
@@ -25,14 +26,12 @@ namespace PhotoDash.Controllers
         }
 
         [HttpPost("login")]
-        [ServiceFilter(typeof(ValidateModelAttribute))]
         public async Task<IActionResult> Login([FromBody]UserForAuthenticationDto authUser)
         {
             return Ok(await _userService.AuthenticateUser(authUser));
         }
 
         [HttpPost("register")]
-        [ServiceFilter(typeof(ValidateModelAttribute))]
         
         public async Task<IActionResult> Register([FromBody] UserForCreationDto newUser)
         {
@@ -45,7 +44,6 @@ namespace PhotoDash.Controllers
         }
 
         [HttpDelete("delete"),Authorize(Roles = RolesHolder.AdminOrUser)]
-        [ServiceFilter(typeof(ValidateModelAttribute))]
 
         public async Task<IActionResult> DeleteUser([FromBody] UserForDeletionDto userForDeletion)
         {
@@ -72,7 +70,7 @@ namespace PhotoDash.Controllers
             return Ok(userResult);
         }
 
-        [HttpGet("followers"),Authorize(Roles = RolesHolder.User)]
+        [HttpGet("following"),Authorize(Roles = RolesHolder.User)]
         public async Task<IActionResult> GetFollowers([FromQuery]FollowersRequestParameters queryParams)
         {
             var currentPrincipal = HttpContext.User;

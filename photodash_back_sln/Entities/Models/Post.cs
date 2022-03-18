@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Entities.Models
 {
@@ -18,8 +19,8 @@ namespace Entities.Models
         [Required(ErrorMessage = "Timestamp is required")]
         public DateTime Posted { get; set; }
 
-        public Guid OwnerId { get; set; }
-        public User Owner { get; set; }
+        [ForeignKey("Owner")]
+        public string OwnerId { get; set; }
 
     }
 }

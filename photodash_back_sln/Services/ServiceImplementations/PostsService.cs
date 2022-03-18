@@ -13,6 +13,8 @@ using System.Security.Claims;
 using Entities.Roles;
 using System.Net;
 using Entities.RequestFeatures;
+using System.Linq;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.ServiceImplementations
 {
@@ -47,28 +49,18 @@ namespace Services.ServiceImplementations
             if (user == null)
                 return false;
 
-            _repository.Posts.CreatePost(new Guid(user.Id), postEntity);
+            _repository.Posts.CreatePost(user.Id, postEntity);
             await _repository.SaveAsync();
 
             return true;
         }
 
-        public async Task<PostForReplyDto> GetPost(string username,Guid id)
+        public async Task<PostForReplyDto> GetPostAsync(Guid id)
         {
-            var user = await _userManager.FindByNameAsync(username);
-
-            if (user == null)
-            {
-
-                _logger.LogError($"USER NOT FOUND USERNAME:{username}");
-                return null;
-            }
-
-
-            var postEntity = await _repository.Posts.GetPost(new Guid(user.Id), id, false);
+            var postEntity = await _repository.Posts.GetPostById(id, false);
             if (postEntity == null)
             {
-                _logger.LogError($"Post doesn't exist. Username:{username} Post ID:{id}");
+                _logger.LogError($"Post doesn't exist.Post ID:{id}");
                 return null;
             }
 
@@ -90,9 +82,11 @@ namespace Services.ServiceImplementations
         public async Task<PagedList<PostForReplyDto>> GetPostsAsync(string username,PostsRequestParameters postRequestParameters)
         {
             var user = await _userManager.FindByNameAsync(username);
-            var posts = await _repository.Posts.GetPostsAsync(new Guid(user.Id), postRequestParameters, false);
+            var posts = await _repository.Posts.GetPostsAsync(user.Id, postRequestParameters, false);
 
-            return _mapper.Map<PagedList<PostForReplyDto>>(posts);
+            var mapped = _mapper.Map < List<PostForReplyDto>>(posts);
+
+            return new PagedList<PostForReplyDto>(mapped, posts.MetaData.TotalCount, postRequestParameters.PageNumber, postRequestParameters.PageSize);
         }
 
         public async Task<IdentityError> RemovePost(string username, Guid id, ClaimsPrincipal currentPrincipal)
@@ -110,7 +104,7 @@ namespace Services.ServiceImplementations
                 return  new IdentityError { Code = HttpStatusCode.NotFound.ToString(), Description = HttpStatusCode.NotFound.ToString() } ;
             }
 
-            var post = await _repository.Posts.GetPost(new Guid(user.Id), id, false);
+            var post = await _repository.Posts.GetPost(user.Id, id, false);
 
             if (post == null)
             {
@@ -126,6 +120,32 @@ namespace Services.ServiceImplementations
             return null;
         }
 
+        public async Task<PagedList<PostForReplyDto>> GetNewestAsync(string username,PostsRequestParameters postsRequestParameters)
+        {
+            var user = await _userManager.Users.Where(x => x.UserName.Equals(username))
+                .Include(u => u.Followers).ThenInclude(f=>f.Posts)
+                .SingleAsync();
 
+
+            var followers = user.Followers;
+
+            var followedPosts = new List<Post>();
+
+            foreach(var following in followers)
+            {
+                followedPosts.AddRange(await _repository.Posts.GetAllPosts(following.Id, false));
+            }
+
+
+            var posts = followedPosts
+                .OrderBy(p=>p.Posted)
+                .Skip((postsRequestParameters.PageNumber-1)*postsRequestParameters.PageSize)
+                .Take(postsRequestParameters.PageSize).ToList();
+
+            var count = followedPosts.Count;
+            var mapped = _mapper.Map<IEnumerable<PostForReplyDto>>(posts);
+
+            return new PagedList<PostForReplyDto>(mapped.ToList(),count, postsRequestParameters.PageNumber, postsRequestParameters.PageSize);
+        }
     }
 }
